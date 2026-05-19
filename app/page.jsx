@@ -79,7 +79,7 @@ export default function ChanakApp() {
   const accentColor = "#3A7D2C";
   const programLabel = "Off Campus / Homeschool";
 
-  const inp  = { width:"100%", padding:"10px 14px", border:"1.5px solid #D1D5E8", borderRadius:"8px", fontSize:"14px", fontFamily:"DM Sans,sans-serif", background:"#F8FBF5", outline:"none", transition:"border .2s", boxSizing:"border-box" };
+  const inp  = { width:"100%", minHeight:"48px", padding:"12px 14px", border:"1.5px solid #D1D5E8", borderRadius:"10px", fontSize:"16px", lineHeight:1.5, fontFamily:"DM Sans,sans-serif", background:"#F8FBF5", outline:"none", transition:"border .2s", boxSizing:"border-box" };
   const errI = { ...inp, border:"1.5px solid #E53E3E", background:"#FFF5F5" };
   const sel  = { ...inp, appearance:"none", cursor:"pointer" };
   const btn  = (bg="#1A3A6B", color="#fff") => ({ background:bg, color, fontWeight:700, fontSize:"13px", letterSpacing:"0.8px", padding:"13px 28px", border:"none", borderRadius:"8px", cursor:"pointer", textTransform:"uppercase", transition:"all .2s", fontFamily:"DM Sans,sans-serif" });
@@ -681,30 +681,38 @@ function QuickForm({ onSuccess, onMatriculate, inp, errI, btn }) {
       <div style={{ display:"grid", gridTemplateColumns:"1fr", gap:"10px" }}>
         <div>
           <input style={errs.n?errI:inp} placeholder="Nombre *" value={d.nombre} onChange={e=>setD({...d,nombre:e.target.value})} />
-          {errs.n && <div style={{ fontSize:"10px", color:"#E53E3E", marginTop:"2px" }}>{errs.n}</div>}
+          {errs.n && <div style={{ fontSize:"12px", lineHeight:1.4, color:"#E53E3E", marginTop:"4px" }}>{errs.n}</div>}
         </div>
         <div>
           <input style={errs.t?errI:inp} placeholder="WhatsApp *" type="tel" value={d.tel} onChange={e=>setD({...d,tel:e.target.value})} />
-          {errs.t && <div style={{ fontSize:"10px", color:"#E53E3E", marginTop:"2px" }}>{errs.t}</div>}
+          {errs.t && <div style={{ fontSize:"12px", lineHeight:1.4, color:"#E53E3E", marginTop:"4px" }}>{errs.t}</div>}
         </div>
       </div>
       <div>
         <input style={errs.e?errI:inp} placeholder="Email *" type="email" value={d.email} onChange={e=>setD({...d,email:e.target.value})} />
-        {errs.e && <div style={{ fontSize:"10px", color:"#E53E3E", marginTop:"2px" }}>{errs.e}</div>}
+        {errs.e && <div style={{ fontSize:"12px", lineHeight:1.4, color:"#E53E3E", marginTop:"4px" }}>{errs.e}</div>}
       </div>
-      <div style={{ fontSize:"12px", color:"#1A3A6B", background:"#EDF2E8", border:"1px solid #C1D9B8", borderRadius:"8px", padding:"10px 12px" }}>Programa: <strong>Off Campus</strong></div>
+      <div style={{ fontSize:"14px", lineHeight:1.5, color:"#1A3A6B", background:"#EDF2E8", border:"1px solid #C1D9B8", borderRadius:"10px", padding:"12px 14px", whiteSpace:"normal", maxWidth:"100%" }}>Programa: <strong>Off Campus</strong></div>
       <input style={inp} placeholder="País de residencia" value={d.pais} onChange={e=>setD({...d,pais:e.target.value})} />
-      <label style={{ display:"flex", alignItems:"flex-start", gap:"8px", fontSize:"11px", color:"#5A7060" }}><input type="checkbox" checked={d.aceptaPrivacidad} onChange={e=>setD({...d,aceptaPrivacidad:e.target.checked})} style={{ marginTop:"2px", accentColor:"#3A7D2C" }} />Acepto que Chanak International Academy trate mis datos para enviarme información sobre sus programas académicos, responder a mi solicitud y contactarme por email, teléfono o WhatsApp. Puedo solicitar la eliminación de mis datos escribiendo a administration@chanakacademy.org.</label>{errs.p && <div style={{ fontSize:"10px", color:"#E53E3E", marginTop:"-4px" }}>{errs.p}</div>}
-      <p style={{ fontSize:"10px", color:"#5A7060", display:"flex", gap:"5px", padding:"8px 10px", background:"#EDF2E8", borderRadius:"6px", margin:0 }}>
+      <label style={{ display:"flex", alignItems:"flex-start", gap:"12px", fontSize:"14px", lineHeight:1.5, color:"#5A7060", whiteSpace:"normal", maxWidth:"100%" }}>
+        <input type="checkbox" checked={d.aceptaPrivacidad} onChange={e=>setD({...d,aceptaPrivacidad:e.target.checked})} style={{ marginTop:"3px", accentColor:"#3A7D2C", flexShrink:0 }} />
+        <span style={{ flex:1, minWidth:0 }}>
+          Acepto que Chanak International Academy trate mis datos para enviarme información sobre sus programas académicos, responder a mi solicitud y contactarme por email, teléfono o WhatsApp. Puedo solicitar la eliminación de mis datos escribiendo a administration@chanakacademy.org.
+        </span>
+      </label>
+      {errs.p && <div style={{ fontSize:"12px", lineHeight:1.4, color:"#E53E3E", marginTop:"-2px" }}>{errs.p}</div>}
+      <p style={{ fontSize:"12px", lineHeight:1.5, color:"#5A7060", display:"flex", gap:"6px", padding:"10px 12px", background:"#EDF2E8", borderRadius:"8px", margin:0, whiteSpace:"normal", maxWidth:"100%" }}>
         🔒 Datos confidenciales. Los usamos únicamente para tu solicitud de Off Campus.
       </p>
-      <button onClick={submit} disabled={sending} style={{ ...btn("#1A3A6B"), width:"100%", padding:"14px", letterSpacing:"1.5px", opacity:sending?0.75:1 }}>
-        📄 Ver dossier Off Campus →
+      <button onClick={submit} disabled={sending} style={{ ...btn("#1A3A6B"), width:"100%", minHeight:"48px", padding:"12px 16px", display:"inline-flex", alignItems:"center", justifyContent:"center", lineHeight:1.4, letterSpacing:"1.2px", opacity:sending?0.75:1 }}>
+        {sending ? "Enviando..." : "📄 Ver dossier Off Campus →"}
       </button>
-      {submitMsg && <p style={{ fontSize:"11px", color:"#3A7D2C", margin:0 }}>{submitMsg}</p>}
-      {submitError && <p style={{ fontSize:"11px", color:"#E53E3E", margin:0 }}>{submitError}</p>}
+      <div style={{ minHeight:"22px" }}>
+        {submitMsg && <p style={{ fontSize:"12px", lineHeight:1.4, color:"#3A7D2C", margin:0 }}>{submitMsg}</p>}
+        {submitError && <p style={{ fontSize:"12px", lineHeight:1.4, color:"#E53E3E", margin:0 }}>{submitError}</p>}
+      </div>
       <button onClick={()=>onMatriculate("offcampus")}
-        style={{ background:"transparent", border:"1px solid #D1D5E8", color:"#5A7060", fontWeight:600, fontSize:"12px", padding:"10px", borderRadius:"6px", cursor:"pointer", fontFamily:"DM Sans,sans-serif" }}>
+        style={{ background:"transparent", border:"1px solid #D1D5E8", color:"#5A7060", fontWeight:600, fontSize:"14px", lineHeight:1.4, minHeight:"48px", padding:"10px 12px", borderRadius:"8px", cursor:"pointer", fontFamily:"DM Sans,sans-serif", width:"100%", whiteSpace:"normal" }}>
         Reservar matrícula Off Campus →
       </button>
     </div>
