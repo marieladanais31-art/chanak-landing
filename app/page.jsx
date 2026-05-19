@@ -440,7 +440,7 @@ export default function ChanakApp() {
 
 // ─── QUICK FORM (hero) ───────────────────────────────────────────
 function QuickForm({ onSuccess, onMatriculate, inp, errI, btn, mode = "info" }) {
-  const [form, setForm] = useState({ nombre:"", email:"", telefono:"", pais:"", alumnos:"", aceptaPrivacidad:false });
+  const [form, setForm] = useState({ nombre:"", email:"", telefono:"", pais:"", nombreAlumno:"", gradoAlumno:"", alumnos:"", aceptaPrivacidad:false });
   const [errs, setErrs] = useState({});
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
@@ -468,6 +468,7 @@ function QuickForm({ onSuccess, onMatriculate, inp, errI, btn, mode = "info" }) 
     if (!form.nombre.trim()) e.n="Requerido";
     if (!form.email.trim()||!form.email.includes("@")) e.e="Email no válido";
     if (!form.telefono.trim()) e.t="Requerido";
+    if (!form.nombreAlumno.trim() || !form.gradoAlumno.trim()) e.student="Por favor completa el nombre del alumno y su grado/curso actual.";
     if (!form.aceptaPrivacidad) e.p="Debes aceptar la política de privacidad";
     setErrs(e);
     if (Object.keys(e).length!==0) return;
@@ -484,8 +485,10 @@ function QuickForm({ onSuccess, onMatriculate, inp, errI, btn, mode = "info" }) 
           telefono: form.telefono,
           pais: form.pais,
           programa: "Off Campus",
-          alumnos: "",
           origen: "Landing Off Campus Meta Ads",
+          alumnos: form.alumnos,
+          nombreAlumno: form.nombreAlumno,
+          gradoAlumno: form.gradoAlumno,
           intent: "matricula_offcampus",
         }),
       });
@@ -511,7 +514,7 @@ function QuickForm({ onSuccess, onMatriculate, inp, errI, btn, mode = "info" }) 
     <form onSubmit={(e)=>{ e.preventDefault(); submit(); }} style={{ display:"flex", flexDirection:"column", gap:"12px" }}>
       <div style={{ display:"grid", gridTemplateColumns:"1fr", gap:"11px" }}>
         <div>
-          <input name="nombre" autoComplete="name" style={errs.n?errI:inp} placeholder="Nombre *" value={form.nombre} onChange={handleChange} />
+          <input name="nombre" autoComplete="name" style={errs.n?errI:inp} placeholder="Nombre del responsable *" value={form.nombre} onChange={handleChange} />
           {errs.n && <div style={{ fontSize:"12px", lineHeight:1.4, color:"#E53E3E", marginTop:"4px" }}>{errs.n}</div>}
         </div>
         <div>
@@ -523,6 +526,11 @@ function QuickForm({ onSuccess, onMatriculate, inp, errI, btn, mode = "info" }) 
         <input name="email" autoComplete="email" style={errs.e?errI:inp} placeholder="Email *" type="email" value={form.email} onChange={handleChange} />
         {errs.e && <div style={{ fontSize:"12px", lineHeight:1.4, color:"#E53E3E", marginTop:"4px" }}>{errs.e}</div>}
       </div>
+      <div style={{ display:"grid", gridTemplateColumns:"1fr", gap:"11px" }}>
+        <input name="nombreAlumno" style={errs.student?errI:inp} placeholder="Nombre del alumno *" value={form.nombreAlumno} onChange={handleChange} />
+        <input name="gradoAlumno" style={errs.student?errI:inp} placeholder="Grado / curso actual *" value={form.gradoAlumno} onChange={handleChange} />
+      </div>
+      {errs.student && <div style={{ fontSize:"12px", lineHeight:1.4, color:"#E53E3E", marginTop:"-2px" }}>{errs.student}</div>}
       <input name="pais" autoComplete="country-name" style={inp} placeholder="País de residencia" value={form.pais} onChange={handleChange} />
       <input name="alumnos" inputMode="numeric" style={inp} placeholder="Número de alumnos (opcional)" value={form.alumnos} onChange={handleChange} />
       <label style={{ display:"flex", alignItems:"flex-start", gap:"10px", fontSize:"12px", lineHeight:1.6, color:"#5A7060", whiteSpace:"normal", maxWidth:"100%" }}>
