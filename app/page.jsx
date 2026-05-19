@@ -396,215 +396,14 @@ export default function ChanakApp() {
   if (view === "form") return (
     <div style={{ minHeight:"100vh", background:"#F8FBF5", fontFamily:"DM Sans,sans-serif" }}>
       <Nav accent={accentColor} />
-
-      {/* Program switcher */}
-      <div style={{ background:"#0E2549", padding:"12px 5%", display:"flex", alignItems:"center", justifyContent:"center", gap:"12px" }}>
-        <span style={{ fontSize:"12px", color:"rgba(255,255,255,.6)" }}>Modalidad:</span>
-        <button style={{ padding:"7px 18px", borderRadius:"20px", border:"none", cursor:"default", fontSize:"11px", fontWeight:700, fontFamily:"DM Sans,sans-serif", background:"#3A7D2C", color:"#fff" }}>🏡 Off Campus / Homeschool</button>
-      </div>
-
-      {/* Progress */}
-      <div style={{ background:"#fff", borderBottom:"1px solid #D1D5E8", padding:"16px 5%" }}>
-        <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:"0", maxWidth:"480px", margin:"0 auto" }}>
-          {[["1","Tutores"],["2","Alumno(s)"],["3","Pago"]].map(([num,label],i) => (
-            <div key={i} style={{ display:"flex", alignItems:"center", flex:1 }}>
-              <div style={{ display:"flex", flexDirection:"column", alignItems:"center", flex:1 }}>
-                <div style={{ width:"32px", height:"32px", borderRadius:"50%", background: formStep>i+1?"#3A7D2C":formStep===i+1?accentColor:"#D1D5E8", color: formStep>=i+1?"#fff":"#999", display:"flex", alignItems:"center", justifyContent:"center", fontWeight:700, fontSize:"13px", transition:"all .3s" }}>{formStep>i+1?"✓":num}</div>
-                <span style={{ fontSize:"10px", color:formStep===i+1?"#1A3A6B":"#999", fontWeight:formStep===i+1?700:400, marginTop:"4px", textAlign:"center" }}>{label}</span>
-              </div>
-              {i<2 && <div style={{ height:"2px", flex:1, marginBottom:"18px", background:formStep>i+1?"#3A7D2C":"#D1D5E8", transition:"background .3s" }} />}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div style={{ maxWidth:"760px", margin:"0 auto", padding:"32px 5% 48px" }}>
-
-        {/* STEP 1 */}
-        {formStep===1 && (
-          <div style={{ display:"flex", flexDirection:"column", gap:"24px" }}>
-            <div>
-              <h2 style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"22px", fontWeight:700, color:"#1A3A6B", marginBottom:"6px" }}>Datos del núcleo familiar</h2>
-              <p style={{ fontSize:"13px", color:"#5A7060" }}>Información de los tutores legales y dirección de contacto.</p>
-            </div>
-            <div style={{ display:"grid", gridTemplateColumns:"1fr", gap:"20px" }}>
-              {[[tutor1,setTutor1,"TUTOR PRINCIPAL","t1n","t1e","t1t"],[tutor2,setTutor2,"SEGUNDO TUTOR",null,null,null]].map(([t,setT,title,en,ee,et],ti) => (
-                <Card key={ti}>
-                  <div style={{ display:"flex", justifyContent:"space-between", marginBottom:"14px" }}>
-                    <span style={{ fontSize:"10px", fontWeight:700, letterSpacing:"1.2px", textTransform:"uppercase", color:"#5A7060" }}>{title}</span>
-                    <select value={t.relacion} onChange={e=>setT({...t,relacion:e.target.value})} style={{ fontSize:"11px", border:"1px solid #D1D5E8", borderRadius:"4px", padding:"2px 8px", fontFamily:"DM Sans,sans-serif", cursor:"pointer" }}>
-                      {ti===0?["Madre","Padre","Tutor Legal"].map(r=><option key={r}>{r}</option>):["Padre","Madre","Tutor Legal"].map(r=><option key={r}>{r}</option>)}
-                    </select>
-                  </div>
-                  <div style={{ display:"flex", flexDirection:"column", gap:"10px" }}>
-                    <Field label={ti===0?"Nombre completo *":"Nombre completo"} error={en&&errors[en]}>
-                      <input style={en&&errors[en]?errI:inp} placeholder={ti===0?"María García":"Juan García"} value={t.nombre} onChange={e=>setT({...t,nombre:e.target.value})} />
-                    </Field>
-                    <Field label={ti===0?"Email *":"Email"} error={ee&&errors[ee]}>
-                      <input style={ee&&errors[ee]?errI:inp} type="email" placeholder={ti===0?"madre@correo.com":"padre@correo.com"} value={t.email} onChange={e=>setT({...t,email:e.target.value})} />
-                    </Field>
-                    <Field label={ti===0?"WhatsApp *":"WhatsApp"} error={et&&errors[et]}>
-                      <input style={et&&errors[et]?errI:inp} type="tel" placeholder="+34 600 000 000" value={t.telefono} onChange={e=>setT({...t,telefono:e.target.value})} />
-                    </Field>
-                  </div>
-                </Card>
-              ))}
-            </div>
-            <Card>
-              <span style={{ fontSize:"10px", fontWeight:700, letterSpacing:"1.2px", textTransform:"uppercase", color:"#5A7060", display:"block", marginBottom:"14px" }}>DIRECCIÓN FAMILIAR</span>
-              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:"12px" }}>
-                <div style={{ gridColumn:"1/3" }}>
-                  <Field label="Calle y número"><input style={inp} placeholder="Calle Principal, 12, 3ºB" value={address.calle} onChange={e=>setAddress({...address,calle:e.target.value})} /></Field>
-                </div>
-                <Field label="Ciudad *" error={errors.city}><input style={errors.city?errI:inp} placeholder="Madrid" value={address.ciudad} onChange={e=>setAddress({...address,ciudad:e.target.value})} /></Field>
-                <Field label="Provincia"><input style={inp} placeholder="Madrid" value={address.provincia} onChange={e=>setAddress({...address,provincia:e.target.value})} /></Field>
-                <Field label="País">
-                  <select style={sel} value={address.pais} onChange={e=>setAddress({...address,pais:e.target.value})}>
-                    {["España","Panamá","Colombia","México","Argentina","Venezuela","Otro"].map(p=><option key={p}>{p}</option>)}
-                  </select>
-                </Field>
-              </div>
-            </Card>
+      <div style={{ maxWidth:"760px", margin:"0 auto", padding:"36px 5% 56px" }}>
+        <div style={{ background:"#fff", border:"1px solid #D1D5E8", borderRadius:"16px", padding:isMobile?"20px":"28px", boxShadow:"0 14px 40px rgba(8,30,60,.08)" }}>
+          <h2 style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"28px", color:"#1A3A6B", marginBottom:"8px" }}>Matrícula Off Campus</h2>
+          <p style={{ fontSize:"14px", color:"#5A7060", lineHeight:1.6, marginBottom:"18px" }}>Completa tus datos para guardar tu lead y luego redirigirte al pago seguro en Stripe.</p>
+          <div style={{ marginBottom:"14px" }}>
+            <a href={PDF_OFFCAMPUS} target="_blank" rel="noopener noreferrer" style={{ ...btn("#3A7D2C"), textDecoration:"none", display:"inline-flex", alignItems:"center", justifyContent:"center" }}>Ver dossier Off Campus</a>
           </div>
-        )}
-
-        {/* STEP 2 */}
-        {formStep===2 && (
-          <div style={{ display:"flex", flexDirection:"column", gap:"24px" }}>
-            <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
-              <div>
-                <h2 style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"22px", fontWeight:700, color:"#1A3A6B", marginBottom:"6px" }}>Información académica del alumno</h2>
-                <p style={{ fontSize:"13px", color:"#5A7060" }}>Puedes matricular varios hijos en el mismo expediente.</p>
-              </div>
-              {n<4 && <button onClick={addStudent} style={{ background:"#EDF2E8", border:"1px solid #D1D5E8", color:"#1A3A6B", fontWeight:700, fontSize:"12px", padding:"8px 16px", borderRadius:"8px", cursor:"pointer", fontFamily:"DM Sans,sans-serif" }}>+ Añadir hermano</button>}
-            </div>
-            {n>1 && <div style={{ background:"#FBF5E6", border:"1px solid #E8D98A", borderRadius:"10px", padding:"14px 18px", display:"flex", justifyContent:"space-between", fontSize:"12px", fontWeight:600 }}>
-              <span>👨‍👩‍👧‍👦 Expediente familiar: <strong>{n} alumnos</strong></span>
-              <span>Matrícula total: <strong style={{color:"#3A7D2C"}}>{totalMat}€</strong> · Mensualidad: <strong>{totalMens}€/mes</strong></span>
-            </div>}
-            {students.map((s,i) => (
-              <Card key={s.id}>
-                <div style={{ display:"flex", justifyContent:"space-between", marginBottom:"14px" }}>
-                  <span style={{ background:"#1A3A6B", color:"#fff", fontSize:"10px", fontWeight:700, padding:"4px 12px", borderRadius:"20px" }}>Estudiante #{i+1}</span>
-                  {n>1 && <button onClick={()=>removeStudent(i)} style={{ background:"transparent", border:"none", color:"#E53E3E", cursor:"pointer", fontSize:"12px", fontFamily:"DM Sans,sans-serif" }}>✕ Eliminar</button>}
-                </div>
-                <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:"12px", marginBottom:"14px" }}>
-                  <div style={{ gridColumn:"1/3" }}>
-                    <Field label="Nombre completo *" error={errors[`s${i}n`]}><input style={errors[`s${i}n`]?errI:inp} placeholder="Nombre y apellidos" value={s.nombre} onChange={e=>updStudent(i,"nombre",e.target.value)} /></Field>
-                  </div>
-                  <Field label="Fecha de nacimiento *" error={errors[`s${i}d`]}><input style={errors[`s${i}d`]?errI:inp} type="date" value={s.fechaNacimiento} onChange={e=>updStudent(i,"fechaNacimiento",e.target.value)} /></Field>
-                  <Field label="Nacionalidad"><input style={inp} placeholder="Española" value={s.nacionalidad} onChange={e=>updStudent(i,"nacionalidad",e.target.value)} /></Field>
-                  <Field label="Curso / Grado actual *" error={errors[`s${i}c`]}><input style={errors[`s${i}c`]?errI:inp} placeholder="5º Primaria" value={s.cursoActual} onChange={e=>updStudent(i,"cursoActual",e.target.value)} /></Field>
-                </div>
-                <div style={{ display:"grid", gridTemplateColumns:"1fr", gap:"12px", paddingTop:"14px", borderTop:"1px solid #D1D5E8", marginBottom:"14px" }}>
-                  <Field label="Nivel de inglés">
-                    <select style={sel} value={s.nivelIngles} onChange={e=>updStudent(i,"nivelIngles",e.target.value)}>
-                      <option>Principiante (A1-A2)</option><option>Intermedio (B1-B2)</option><option>Avanzado (C1-C2)</option>
-                    </select>
-                  </Field>
-                  <Field label="Nivel de matemáticas">
-                    <select style={sel} value={s.nivelMatematicas} onChange={e=>updStudent(i,"nivelMatematicas",e.target.value)}>
-                      <option>Bajo / Requiere apoyo</option><option>Intermedio</option><option>Alto / Avanzado</option>
-                    </select>
-                  </Field>
-                </div>
-                <div>
-                  <label style={lbl}>Documentación disponible para adjuntar</label>
-                  <div style={{ display:"grid", gridTemplateColumns:"repeat(2,1fr)", gap:"8px" }}>
-                    {["Boletines escolares 2025","Historial Académico","DNI / Pasaporte","Certificaciones de Inglés"].map(d => (
-                      <label key={d} style={{ display:"flex", alignItems:"center", gap:"8px", fontSize:"12px", padding:"9px 12px", border:"1px solid #D1D5E8", borderRadius:"8px", cursor:"pointer", background:"#fff", color:"#5A7060" }}>
-                        <input type="checkbox" checked={s.docs.includes(d)} onChange={()=>toggleDoc(i,d)} style={{ accentColor }} />
-                        {d}
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        )}
-
-        {/* STEP 3 */}
-        {formStep===3 && (
-          <div style={{ display:"flex", flexDirection:"column", gap:"20px" }}>
-            <div>
-              <h2 style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"22px", fontWeight:700, color:"#1A3A6B", marginBottom:"6px" }}>Confirmación y pago</h2>
-              <p style={{ fontSize:"13px", color:"#5A7060" }}>Revisa el resumen, acepta las condiciones y procede al pago.</p>
-            </div>
-
-            {/* Summary */}
-            <div style={{ background:"#1A3A6B", borderRadius:"12px", padding:"24px", color:"#fff" }}>
-              <div style={{ fontSize:"10px", fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:accentColor, marginBottom:"14px" }}>RESUMEN DEL EXPEDIENTE</div>
-              <div style={{ display:"grid", gridTemplateColumns:"1fr", gap:"14px", fontSize:"13px", marginBottom:"16px" }}>
-                {[["PROGRAMA",programLabel],["TUTOR",tutor1.nombre||"—"],["ALUMNO(S)",students.map(s=>s.nombre||"Sin nombre").join(", ")],["CANALIZACIÓN",generalInfo.hub]].map(([k,v]) => (
-                  <div key={k}><span style={{ color:"rgba(255,255,255,.5)", fontSize:"10px", display:"block", marginBottom:"3px" }}>{k}</span><strong style={{color:"#fff"}}>{v}</strong></div>
-                ))}
-              </div>
-              <div style={{ borderTop:"1px solid rgba(255,255,255,.1)", paddingTop:"16px", display:"flex", justifyContent:"space-between" }}>
-                <div><div style={{ fontSize:"10px", color:"rgba(255,255,255,.5)", marginBottom:"3px" }}>MATRÍCULA INICIAL</div><div style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"28px", fontWeight:700, color:accentColor }}>{totalMat}€</div><div style={{ fontSize:"10px", color:"rgba(255,255,255,.5)" }}>{pricing.matricula}€ × {n} {n===1?"alumno":"alumnos"}</div></div>
-                <div style={{ textAlign:"right" }}><div style={{ fontSize:"10px", color:"rgba(255,255,255,.5)", marginBottom:"3px" }}>MENSUALIDAD</div><div style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"22px", fontWeight:700, color:"#7DCF47" }}>{totalMens}€/mes</div><div style={{ fontSize:"10px", color:"rgba(255,255,255,.5)" }}>{pricing.periodo}</div></div>
-              </div>
-            </div>
-
-            <Card>
-              <div style={{ display:"flex", flexDirection:"column", gap:"12px" }}>
-                <Field label="Motivo de matrícula en Chanak">
-                  <input style={inp} placeholder="Ej. Ruta flexible homeschool, acompañamiento académico y seguimiento" value={generalInfo.motivo} onChange={e=>setGeneralInfo({...generalInfo,motivo:e.target.value})} />
-                </Field>
-              </div>
-            </Card>
-
-            <Card style={{ background:"#F8FBF5" }}>
-              <span style={{ fontSize:"10px", fontWeight:700, letterSpacing:"1.2px", textTransform:"uppercase", color:"#5A7060", display:"block", marginBottom:"14px" }}>AVISO LEGAL Y COMPROMISOS</span>
-              <div style={{ display:"flex", flexDirection:"column", gap:"12px" }}>
-                {[
-                  {key:"aceptaDatos",err:"datos",text:"Autorizo a Chanak International Academy a utilizar estos datos para la gestión de admisiones y apertura del expediente en Florida."},
-                  {key:"aceptaResponsabilidad",err:"resp",text:"Entiendo que la familia mantiene la responsabilidad legal local y el compromiso con las asignaturas de origen para la convalidación mutua."},
-                  {key:"confirmaPago",err:"pago",gold:true,text:`Confirmo que realizaré el abono de la matrícula (${totalMat}€) y comprendo la estructura de seguimiento mensual (${totalMens}€/mes).`},
-                ].map(({key,err,text,gold}) => (
-                  <label key={key} style={{ display:"flex", alignItems:"flex-start", gap:"10px", fontSize:"12px", cursor:"pointer", padding: gold?"12px":"0", background: gold?"#FBF5E6":"transparent", border: gold?"1px solid #E8D98A":"none", borderRadius: gold?"8px":"0", color:"#5A7060" }}>
-                    <input type="checkbox" checked={generalInfo[key]} onChange={e=>setGeneralInfo({...generalInfo,[key]:e.target.checked})} style={{ marginTop:"1px", accentColor, flexShrink:0 }} />
-                    <span style={{ fontWeight:gold?600:400, color:gold?"#1C2820":"#5A7060" }}>{text}</span>
-                  </label>
-                ))}
-                {(errors.datos||errors.resp||errors.pago) && <div style={{ fontSize:"11px", color:"#E53E3E" }}>Por favor acepta todos los compromisos para continuar.</div>}
-              </div>
-            </Card>
-
-            <Card>
-              <div style={{ display:"grid", gridTemplateColumns:"1fr", gap:"14px" }}>
-                <Field label="Firma digital (nombre completo) *" error={errors.firma}>
-                  <input style={errors.firma?errI:inp} placeholder="Escribe tu nombre completo" value={generalInfo.firmaNombre} onChange={e=>setGeneralInfo({...generalInfo,firmaNombre:e.target.value})} />
-                </Field>
-                <Field label="Fecha de la firma">
-                  <input style={inp} type="date" value={generalInfo.fechaFirma} onChange={e=>setGeneralInfo({...generalInfo,fechaFirma:e.target.value})} />
-                </Field>
-              </div>
-            </Card>
-
-            {/* STRIPE */}
-            <div style={{ background:"linear-gradient(135deg,#1A3A6B,#0E2549)", borderRadius:"16px", padding:"28px", textAlign:"center" }}>
-              <div style={{ fontSize:"12px", color:"rgba(255,255,255,.6)", marginBottom:"8px" }}>Paso final — Pago seguro de matrícula</div>
-              <div style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"38px", fontWeight:700, color:accentColor, marginBottom:"6px" }}>{totalMat}€</div>
-              <div style={{ fontSize:"12px", color:"rgba(255,255,255,.5)", marginBottom:"20px" }}>{pricing.matricula}€ × {n} {n===1?"alumno":"alumnos"} · Pago único de matrícula</div>
-              <a href={STRIPE_URL} target="_blank" rel="noopener noreferrer"
-                style={{ display:"inline-flex", alignItems:"center", gap:"10px", background:"#635BFF", color:"#fff", fontWeight:700, fontSize:"14px", padding:"16px 36px", borderRadius:"10px", textDecoration:"none", letterSpacing:"0.5px", boxShadow:"0 8px 24px rgba(99,91,255,.4)" }}>
-                💳 Iniciar matrícula Off Campus ({totalMat}€) con Stripe
-              </a>
-              <p style={{ fontSize:"11px", color:"rgba(255,255,255,.35)", marginTop:"12px", lineHeight:1.6 }}>Pago 100% seguro · SSL · Stripe · Sin cargos ocultos<br />Tras el pago, un asesor activará tu expediente en 24h hábiles.</p>
-            </div>
-          </div>
-        )}
-
-        {/* Nav buttons */}
-        <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginTop:"28px", paddingTop:"20px", borderTop:"1px solid #D1D5E8" }}>
-          <button onClick={formStep===1?()=>setView("landing"):prevStep} style={{ background:"transparent", border:"1px solid #D1D5E8", color:"#5A7060", fontWeight:600, fontSize:"13px", padding:"11px 24px", borderRadius:"8px", cursor:"pointer", fontFamily:"DM Sans,sans-serif" }}>
-            ← {formStep===1?"Volver":"Anterior"}
-          </button>
-          {formStep<3
-            ? <button onClick={nextStep} style={btn()}>Continuar →</button>
-            : <button onClick={()=>setView("success")} style={{ ...btn("#3A7D2C"), display:"flex", alignItems:"center", gap:"8px" }}>✓ Guardar expediente</button>
-          }
+          <QuickForm mode="matricula" inp={inp} errI={errI} btn={btn} />
         </div>
       </div>
     </div>
@@ -640,8 +439,8 @@ export default function ChanakApp() {
 }
 
 // ─── QUICK FORM (hero) ───────────────────────────────────────────
-function QuickForm({ onSuccess, onMatriculate, inp, errI, btn }) {
-  const [form, setForm] = useState({ nombre:"", whatsapp:"", email:"", pais:"", aceptaPrivacidad:false });
+function QuickForm({ onSuccess, onMatriculate, inp, errI, btn, mode = "info" }) {
+  const [form, setForm] = useState({ nombre:"", email:"", telefono:"", pais:"", alumnos:"", aceptaPrivacidad:false });
   const [errs, setErrs] = useState({});
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
@@ -668,34 +467,40 @@ function QuickForm({ onSuccess, onMatriculate, inp, errI, btn }) {
     const e = {};
     if (!form.nombre.trim()) e.n="Requerido";
     if (!form.email.trim()||!form.email.includes("@")) e.e="Email no válido";
-    if (!form.whatsapp.trim()) e.t="Requerido";
+    if (!form.telefono.trim()) e.t="Requerido";
     if (!form.aceptaPrivacidad) e.p="Debes aceptar la política de privacidad";
     setErrs(e);
     if (Object.keys(e).length!==0) return;
     try {
       setSending(true);
       setSubmitError("");
-      setSubmitMsg("Enviando...");
+      setSubmitMsg("Guardando tus datos...");
       const res = await fetch("/api/brevo-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           nombre: form.nombre,
           email: form.email,
-          telefono: form.whatsapp,
-          whatsapp: form.whatsapp,
+          telefono: form.telefono,
           pais: form.pais,
           programa: "Off Campus",
           alumnos: "",
           origen: "Landing Off Campus Meta Ads",
+          intent: "matricula_offcampus",
         }),
       });
-      if (!res.ok) throw new Error("error");
-      setSubmitMsg("Gracias. Hemos recibido tu solicitud sobre Off Campus. Nuestro equipo se pondrá en contacto contigo.");
-      setSent(true);
-      onSuccess();
+      const data = await res.json();
+      if (!res.ok || !data?.success) throw new Error("error");
+      if (mode === "matricula") {
+        setSubmitMsg("Datos recibidos. Redirigiendo al pago...");
+        setTimeout(() => { window.location.href = STRIPE_URL; }, 700);
+      } else {
+        setSubmitMsg("Gracias. Hemos recibido tu solicitud sobre Off Campus. Nuestro equipo se pondrá en contacto contigo.");
+        setSent(true);
+        onSuccess?.();
+      }
     } catch {
-      setSubmitError("Error al enviar. Intenta nuevamente.");
+      setSubmitError("No pudimos guardar tus datos. Intenta nuevamente o escríbenos.");
       setSubmitMsg("");
     } finally {
       setSending(false);
@@ -706,19 +511,20 @@ function QuickForm({ onSuccess, onMatriculate, inp, errI, btn }) {
     <form onSubmit={(e)=>{ e.preventDefault(); submit(); }} style={{ display:"flex", flexDirection:"column", gap:"12px" }}>
       <div style={{ display:"grid", gridTemplateColumns:"1fr", gap:"11px" }}>
         <div>
-          <input name="nombre" style={errs.n?errI:inp} placeholder="Nombre *" value={form.nombre} onChange={handleChange} />
+          <input name="nombre" autoComplete="name" style={errs.n?errI:inp} placeholder="Nombre *" value={form.nombre} onChange={handleChange} />
           {errs.n && <div style={{ fontSize:"12px", lineHeight:1.4, color:"#E53E3E", marginTop:"4px" }}>{errs.n}</div>}
         </div>
         <div>
-          <input name="whatsapp" style={errs.t?errI:inp} placeholder="WhatsApp *" type="tel" value={form.whatsapp} onChange={handleChange} />
+          <input name="telefono" autoComplete="tel" style={errs.t?errI:inp} placeholder="WhatsApp *" type="tel" value={form.telefono} onChange={handleChange} />
           {errs.t && <div style={{ fontSize:"12px", lineHeight:1.4, color:"#E53E3E", marginTop:"4px" }}>{errs.t}</div>}
         </div>
       </div>
       <div>
-        <input name="email" style={errs.e?errI:inp} placeholder="Email *" type="email" value={form.email} onChange={handleChange} />
+        <input name="email" autoComplete="email" style={errs.e?errI:inp} placeholder="Email *" type="email" value={form.email} onChange={handleChange} />
         {errs.e && <div style={{ fontSize:"12px", lineHeight:1.4, color:"#E53E3E", marginTop:"4px" }}>{errs.e}</div>}
       </div>
-      <input name="pais" style={inp} placeholder="País de residencia" value={form.pais} onChange={handleChange} />
+      <input name="pais" autoComplete="country-name" style={inp} placeholder="País de residencia" value={form.pais} onChange={handleChange} />
+      <input name="alumnos" inputMode="numeric" style={inp} placeholder="Número de alumnos (opcional)" value={form.alumnos} onChange={handleChange} />
       <label style={{ display:"flex", alignItems:"flex-start", gap:"10px", fontSize:"12px", lineHeight:1.6, color:"#5A7060", whiteSpace:"normal", maxWidth:"100%" }}>
         <input name="aceptaPrivacidad" type="checkbox" checked={form.aceptaPrivacidad} onChange={handleChange} style={{ marginTop:"3px", accentColor:"#3A7D2C", flexShrink:0 }} />
         <span style={{ flex:1, minWidth:0 }}>
@@ -730,16 +536,16 @@ function QuickForm({ onSuccess, onMatriculate, inp, errI, btn }) {
         🔒 Datos confidenciales. Los usamos únicamente para tu solicitud de Off Campus.
       </p>
       <button type="submit" disabled={sending} style={{ ...btn("#3A7D2C"), width:"100%", minHeight:"48px", padding:"12px 16px", display:"inline-flex", alignItems:"center", justifyContent:"center", lineHeight:1.4, letterSpacing:"0.6px", opacity:sending?0.75:1 }}>
-        {sending ? "Enviando..." : "Enviar y recibir dossier gratis"}
+        {sending ? "Guardando tus datos..." : (mode === "matricula" ? "Matricularme y pagar" : "Enviar y recibir dossier gratis")}
       </button>
       <div style={{ minHeight:"22px" }}>
         {submitMsg && <p style={{ fontSize:"12px", lineHeight:1.4, color:"#3A7D2C", margin:0 }}>{submitMsg}</p>}
         {submitError && <p style={{ fontSize:"12px", lineHeight:1.4, color:"#E53E3E", margin:0 }}>{submitError}</p>}
       </div>
-      <button type="button" onClick={()=>onMatriculate("offcampus")}
+      {mode !== "matricula" && <button type="button" onClick={()=>onMatriculate?.("offcampus")}
         style={{ background:"#fff", border:"1px solid #C8D4E3", color:"#1A3A6B", fontWeight:700, fontSize:"13px", lineHeight:1.4, minHeight:"46px", padding:"10px 12px", borderRadius:"10px", cursor:"pointer", fontFamily:"DM Sans,sans-serif", width:"100%", whiteSpace:"normal" }}>
         Ya decidí — matricularme
-      </button>
+      </button>}
     </form>
   );
 }
@@ -785,7 +591,7 @@ function PDFPicker({ pdfOC, onMatriculate, onSuccess, inp, errI, btn }) {
             📄 Enviar información Off Campus →
           </button>
           <div style={{ textAlign:"center", marginTop:"14px" }}>
-            <button type="button" onClick={()=>onMatriculate("offcampus")}
+            <button type="button" onClick={()=>onMatriculate?.("offcampus")}
               style={{ background:"transparent", border:"none", color:"#5A7060", fontSize:"12px", cursor:"pointer", fontFamily:"DM Sans,sans-serif", textDecoration:"underline" }}>
               Iniciar matrícula Off Campus
             </button>
