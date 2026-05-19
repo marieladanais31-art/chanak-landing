@@ -29,7 +29,7 @@ export default function ChanakApp() {
     nivelMatematicas:"Intermedio", docs:[], colegioPresencial:""
   }]);
   const [generalInfo, setGeneralInfo] = useState({
-    motivo:"", fechaInicio:"", hub:"EducaFe General a Distancia",
+    motivo:"", fechaInicio:"",
     aceptaDatos:false, aceptaResponsabilidad:false, confirmaPago:false,
     firmaNombre:"", fechaFirma: new Date().toISOString().split("T")[0]
   });
@@ -548,12 +548,6 @@ export default function ChanakApp() {
 
             <Card>
               <div style={{ display:"flex", flexDirection:"column", gap:"12px" }}>
-                <Field label="Modalidad de canalización / sede">
-                  <select style={sel} value={generalInfo.hub} onChange={e=>setGeneralInfo({...generalInfo,hub:e.target.value})}>
-                    <option value="EducaFe General a Distancia">EducaFe General a Distancia</option>
-                    <option value="Matrícula Directa a Estados Unidos">Matrícula Directa a Estados Unidos</option>
-                  </select>
-                </Field>
                 <Field label="Motivo de matrícula en Chanak">
                   <input style={inp} placeholder="Ej. Ruta flexible homeschool, acompañamiento académico y seguimiento" value={generalInfo.motivo} onChange={e=>setGeneralInfo({...generalInfo,motivo:e.target.value})} />
                 </Field>
@@ -728,7 +722,7 @@ function QuickForm({ onSuccess, onMatriculate, inp, errI, btn }) {
       <label style={{ display:"flex", alignItems:"flex-start", gap:"10px", fontSize:"12px", lineHeight:1.6, color:"#5A7060", whiteSpace:"normal", maxWidth:"100%" }}>
         <input name="aceptaPrivacidad" type="checkbox" checked={form.aceptaPrivacidad} onChange={handleChange} style={{ marginTop:"3px", accentColor:"#3A7D2C", flexShrink:0 }} />
         <span style={{ flex:1, minWidth:0 }}>
-          Acepto que Chanak International Academy trate mis datos para enviarme información sobre sus programas académicos, responder a mi solicitud y contactarme por email, teléfono o WhatsApp. Puedo solicitar la eliminación de mis datos escribiendo a administration@chanakacademy.org.
+          Acepto que Chanak International Academy trate mis datos para enviarme información sobre Off Campus / Homeschool, responder a mi solicitud y contactarme por email, teléfono o WhatsApp. Puedo solicitar la eliminación de mis datos escribiendo a administration@chanakacademy.org.
         </span>
       </label>
       {errs.p && <div style={{ fontSize:"12px", lineHeight:1.4, color:"#E53E3E", marginTop:"-2px" }}>{errs.p}</div>}
@@ -736,7 +730,7 @@ function QuickForm({ onSuccess, onMatriculate, inp, errI, btn }) {
         🔒 Datos confidenciales. Los usamos únicamente para tu solicitud de Off Campus.
       </p>
       <button type="submit" disabled={sending} style={{ ...btn("#3A7D2C"), width:"100%", minHeight:"48px", padding:"12px 16px", display:"inline-flex", alignItems:"center", justifyContent:"center", lineHeight:1.4, letterSpacing:"0.6px", opacity:sending?0.75:1 }}>
-        {sending ? "Enviando..." : "Quiero el dossier gratis"}
+        {sending ? "Enviando..." : "Enviar y recibir dossier gratis"}
       </button>
       <div style={{ minHeight:"22px" }}>
         {submitMsg && <p style={{ fontSize:"12px", lineHeight:1.4, color:"#3A7D2C", margin:0 }}>{submitMsg}</p>}
