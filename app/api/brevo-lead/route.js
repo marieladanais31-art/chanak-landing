@@ -6,9 +6,9 @@ export async function POST(request) {
       nombre = "",
       email = "",
       telefono = "",
-      programa = "",
+      programa = "Off Campus",
       alumnos = "",
-      origen = "Landing Chanak",
+      origen = "Landing Off Campus Meta Ads",
     } = body;
 
     if (!email || !email.includes("@")) {
@@ -33,9 +33,9 @@ export async function POST(request) {
       attributes: {
         NOMBRE: nombre || "",
         TELEFONO: telefono || "",
-        PROGRAMA: programa || "",
+        PROGRAMA: programa || "Off Campus",
         ALUMNOS: alumnos || "",
-        ORIGEN: origen || "Landing Chanak",
+        ORIGEN: origen || "Landing Off Campus Meta Ads",
       },
       listIds: [listId],
       updateEnabled: true,
