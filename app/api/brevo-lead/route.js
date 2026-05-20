@@ -36,10 +36,16 @@ export async function POST(request) {
     const senderName = process.env.BREVO_SENDER_NAME || "Chanak Academy";
     const now = new Date().toISOString();
 
+    const isDualDiploma = (programa || "").toLowerCase().includes("dual");
+    const destinationEmail = isDualDiploma
+      ? "dualdiploma@chanakacademy.org"
+      : "offcampus@chanakacademy.org";
+    const destinationName = isDualDiploma ? "Dual Diploma" : "Off Campus";
+
     const internalEmailPayload = {
       sender: { email: senderEmail, name: senderName },
-      to: [{ email: "offcampus@chanakacademy.org", name: "Off Campus" }],
-      subject: "Nuevo lead Off Campus desde landing",
+      to: [{ email: destinationEmail, name: destinationName }],
+      subject: `Nuevo lead ${programa || "Off Campus"} desde landing`,
       htmlContent: `<p><strong>Nuevo lead Off Campus</strong></p>
 <p><strong>Responsable:</strong></p>
 <p><strong>Nombre:</strong> ${nombre}</p>
@@ -52,8 +58,8 @@ export async function POST(request) {
 <p><strong>Grado/curso actual:</strong> ${gradoAlumno || "-"}</p>
 <p><strong>Número de alumnos:</strong> ${alumnos || "-"}</p>
 <br/>
-<p><strong>Programa:</strong><br/>Off Campus</p>
-<p><strong>Origen:</strong><br/>Landing Off Campus Meta Ads</p>
+<p><strong>Programa:</strong><br/>${programa || "Off Campus"}</p>
+<p><strong>Origen:</strong><br/>${origen || "Landing Off Campus Meta Ads"}</p>
 <p><strong>Intent:</strong> ${intent || "-"}</p>
 <p><strong>Fecha/hora de solicitud:</strong> ${now}</p>
 <p><strong>Nota:</strong><br/>Este lead llegó antes del pago o durante el intento de matrícula. Dar seguimiento aunque no complete Stripe.</p>`,
