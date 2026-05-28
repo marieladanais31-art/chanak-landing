@@ -363,11 +363,15 @@ export default function ChanakApp() {
             administration@chanakacademy.org · chanakacademy.org
           </div>
         </div>
-        <div style={{ display:"flex", gap:"18px", flexWrap:"wrap" }}>
-          {["Privacidad","Programas","chanakacademy.org"].map((t,i) => (
-            <span key={i} style={{ fontSize:"10px", letterSpacing:"1px", textTransform:"uppercase", color:"rgba(255,255,255,.35)", cursor:"pointer" }}>{t}</span>
+        <nav aria-label="Enlaces legales" style={{ display:"flex", gap:"18px", flexWrap:"wrap" }}>
+          {[
+            ["Política de Privacidad","/privacidad"],
+            ["Política de Cookies","/cookies"],
+            ["Aviso Legal","/aviso-legal"],
+          ].map(([label, href]) => (
+            <a key={href} href={href} style={{ fontSize:"10px", letterSpacing:"1px", textTransform:"uppercase", color:"rgba(255,255,255,.6)", textDecoration:"none" }}>{label}</a>
           ))}
-        </div>
+        </nav>
       </footer>
     </div>
   );
