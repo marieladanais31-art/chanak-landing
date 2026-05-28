@@ -28,6 +28,7 @@ export default function RootLayout({ children }) {
             });
 
             gtag('config', 'AW-18109980849');
+            gtag('config', 'GT-NSSXS5N6');
           `}
         </Script>
       </body>
