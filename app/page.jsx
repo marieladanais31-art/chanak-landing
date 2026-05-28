@@ -280,7 +280,7 @@ export default function ChanakApp() {
           <h2 style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"clamp(24px,3.5vw,38px)", fontWeight:700, color:"#1A3A6B" }}>Credenciales que respaldan a Chanak</h2>
         </div>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:"20px" }}>
-          {[{img:FLDOE_SRC,bg:"#fff",title:"Florida Dept. of Education",text:"Registrada como Private School con estatus activo.",badge:"FDOE #134620"},{img:MSA_SRC,bg:"#0E3A5C",title:"Middle States Association",text:"Official Candidate for Accreditation — organismo americano de referencia.",badge:"Official Candidate"},{img:LOGO_SRC,bg:"#fff",title:"Nonprofit 501(c)(3)",text:"Organización sin fines de lucro registrada en Florida.",badge:"Florida Nonprofit"}].map((c,i) => (
+          {[{img:FLDOE_SRC,bg:"#fff",title:"Florida Dept. of Education",text:"Registrada como Private School con estatus activo.",badge:"FDOE #134620"},{img:MSA_SRC,bg:"#0E3A5C",title:"Middle States Association",text:"Official Candidate for Accreditation — organismo americano de referencia.",badge:"Official Candidate"},{img:LOGO_SRC,bg:"#fff",title:"Chanak Foundation",text:"Datos fiscales y registrales pendientes de completar tras confirmación legal.",badge:"Pendiente legal"}].map((c,i) => (
             <div key={i} style={{ border:"1px solid #D1D5E8", borderRadius:"12px", padding:"28px", textAlign:"center", background:"#F8FBF5", transition:"transform .2s, box-shadow .2s" }}
               onMouseEnter={e=>{ e.currentTarget.style.transform="translateY(-4px)"; e.currentTarget.style.boxShadow="0 20px 60px rgba(26,58,107,.1)"; }}
               onMouseLeave={e=>{ e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.boxShadow="none"; }}>
@@ -358,14 +358,19 @@ export default function ChanakApp() {
           </div>
           <div style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"14px", color:"#fff", marginBottom:"5px" }}>Chanak International Academy</div>
           <div style={{ fontSize:"10px", color:"rgba(255,255,255,.3)", lineHeight:1.8 }}>
-            FDOE #134620 · Nonprofit Florida #N25000012528 · 501(c)(3)<br />
+            FDOE #134620 · Datos fiscales y registrales: [PENDIENTE DE COMPLETAR]<br />
             Official Candidate for Accreditation — Middle States Association<br />
-            administration@chanakacademy.org · chanakacademy.org
+            administration@chanakacademy.org · foundation.chanakacademy.org
           </div>
         </div>
         <div style={{ display:"flex", gap:"18px", flexWrap:"wrap" }}>
-          {["Privacidad","Programas","chanakacademy.org"].map((t,i) => (
-            <span key={i} style={{ fontSize:"10px", letterSpacing:"1px", textTransform:"uppercase", color:"rgba(255,255,255,.35)", cursor:"pointer" }}>{t}</span>
+          {[
+            ["Privacidad","/privacidad"],
+            ["Cookies","/cookies"],
+            ["Aviso legal","/aviso-legal"],
+            ["chanakacademy.org","https://chanakacademy.org"],
+          ].map(([t,href]) => (
+            <a key={t} href={href} style={{ fontSize:"10px", letterSpacing:"1px", textTransform:"uppercase", color:"rgba(255,255,255,.55)", textDecoration:"none" }}>{t}</a>
           ))}
         </div>
       </footer>
@@ -536,7 +541,7 @@ function QuickForm({ onSuccess, onMatriculate, inp, errI, btn, mode = "info" }) 
       <label style={{ display:"flex", alignItems:"flex-start", gap:"10px", fontSize:"12px", lineHeight:1.6, color:"#5A7060", whiteSpace:"normal", maxWidth:"100%" }}>
         <input name="aceptaPrivacidad" type="checkbox" checked={form.aceptaPrivacidad} onChange={handleChange} style={{ marginTop:"3px", accentColor:"#3A7D2C", flexShrink:0 }} />
         <span style={{ flex:1, minWidth:0 }}>
-          Acepto que Chanak International Academy trate mis datos para enviarme información sobre Off Campus / Homeschool, responder a mi solicitud y contactarme por email, teléfono o WhatsApp. Puedo solicitar la eliminación de mis datos escribiendo a administration@chanakacademy.org.
+          Acepto que Chanak International Academy trate mis datos para enviarme información sobre Off Campus / Homeschool, responder a mi solicitud y contactarme por email, teléfono o WhatsApp. He leído la <a href="/privacidad" target="_blank" rel="noopener noreferrer" style={{ color:"#2F6F24", fontWeight:700 }}>política de privacidad</a> y puedo solicitar la eliminación de mis datos escribiendo a administration@chanakacademy.org.
         </span>
       </label>
       {errs.p && <div style={{ fontSize:"12px", lineHeight:1.4, color:"#E53E3E", marginTop:"-2px" }}>{errs.p}</div>}
