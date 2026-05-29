@@ -130,7 +130,7 @@ export default function ChanakApp() {
       {/* Urgency bar */}
       <div style={{ background:"#0E2549", color:"#fff", padding:"9px 20px", textAlign:"center", fontSize:"12px", fontWeight:500, borderBottom:"2px solid #B8962E" }}>
         ✅ <strong style={{color:"#FFD166"}}>Admisiones abiertas todo el año.</strong> El modelo Mastery Learning se adapta a tu ritmo.{" "}
-        <span onClick={()=>setView("pdf")} style={{ color:"#7DCF47", textDecoration:"underline", cursor:"pointer" }}>Solicitar dossier gratis →</span>
+        <span onClick={()=>setView("pdf")} style={{ color:"#7DCF47", textDecoration:"underline", cursor:"pointer" }}>Solicitar información →</span>
       </div>
 
       <Nav showBack={false} />
@@ -159,7 +159,7 @@ export default function ChanakApp() {
             </div>
           ))}
           <div style={{ display:"flex", gap:"12px", flexWrap:"wrap", margin:"28px 0" }}>
-            <a href={PDF_OFFCAMPUS} target="_blank" rel="noopener noreferrer" style={{ ...btn("#3A7D2C"), display:"inline-flex", alignItems:"center", textDecoration:"none" }}>Quiero el dossier gratis</a>
+            <a href={PDF_OFFCAMPUS} target="_blank" rel="noopener noreferrer" style={{ ...btn("#3A7D2C"), display:"inline-flex", alignItems:"center", textDecoration:"none" }}>Recibir dossier informativo</a>
             <button onClick={()=>{ setProgram("offcampus"); setView("form"); }} style={{ ...btn("transparent","rgba(255,255,255,.65)"), border:"1px solid rgba(255,255,255,.2)" }}>Ya decidí — matricularme</button>
           </div>
           <div style={{ display:"flex", gap:"10px", flexWrap:"wrap", alignItems:"stretch" }}>
@@ -213,7 +213,7 @@ export default function ChanakApp() {
 
       {/* STATS */}
       <div style={{ background:"#3A7D2C", display:"flex", flexWrap:"wrap" }}>
-        {[["K–12","Ruta académica completa"],["100%","Online · cualquier país"],["Todo el año","Admisiones abiertas"],["Gratis","Dossier + orientación"]].map(([n,l],i) => (
+        {[["K–12","Ruta académica completa"],["100%","Online · cualquier país"],["Todo el año","Admisiones abiertas"],["Admisiones","Respuesta del equipo"]].map(([n,l],i) => (
           <div key={i} style={{ flex:1, minWidth:"110px", padding:"20px 24px", textAlign:"center", borderRight:i<3?"1px solid rgba(255,255,255,.2)":"none" }}>
             <span style={{ display:"block", fontFamily:"Playfair Display,Georgia,serif", fontSize:"24px", fontWeight:700, color:"#fff" }}>{n}</span>
             <span style={{ display:"block", fontSize:"9px", letterSpacing:"1.5px", textTransform:"uppercase", color:"rgba(255,255,255,.75)", marginTop:"2px" }}>{l}</span>
@@ -248,7 +248,7 @@ export default function ChanakApp() {
                 📄 Dossier Off Campus: ruta flexible, LMS/SIS y proceso de matrícula
               </div>
               <div style={{ display:"flex", gap:"10px" }}>
-                <a href={PDF_OFFCAMPUS} target="_blank" rel="noopener noreferrer" style={{ ...btn("#3A7D2C"), flex:1, padding:"12px", fontSize:"12px", textDecoration:"none", display:"inline-flex", alignItems:"center", justifyContent:"center" }}>Quiero el dossier gratis</a>
+                <a href={PDF_OFFCAMPUS} target="_blank" rel="noopener noreferrer" style={{ ...btn("#3A7D2C"), flex:1, padding:"12px", fontSize:"12px", textDecoration:"none", display:"inline-flex", alignItems:"center", justifyContent:"center" }}>Recibir dossier informativo</a>
                 <button onClick={()=>{ setProgram(c.id); setView("form"); }} style={{ ...btn("#1A3A6B"), flex:1, padding:"12px", fontSize:"12px" }}>Matricularme</button>
               </div>
             </div>
@@ -262,8 +262,8 @@ export default function ChanakApp() {
           <p style={{ fontSize:"10px", fontWeight:700, letterSpacing:"3px", textTransform:"uppercase", color:"#7DCF47", marginBottom:"10px" }}>CÓMO FUNCIONA</p>
           <h2 style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"clamp(24px,3.5vw,38px)", fontWeight:700, color:"#fff", lineHeight:1.2, marginBottom:"12px" }}>Del primer contacto al diploma</h2>
         </div>
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:"24px" }}>
-          {[["1","Solicitas el dossier","Accedes al dossier Off Campus al instante."],["2","Orientación gratuita","Llamada de 30 min para tu ruta familiar."],["3","Te matriculas","Formulario + diagnóstico + pago seguro."],["4","Avanzas","Con mentora, currículo y seguimiento real."]].map(([num,title,text],i) => (
+        <div style={{ display:"grid", gridTemplateColumns:isMobile?"1fr":"repeat(5,1fr)", gap:"24px" }}>
+          {[["1","Solicitas información","Accedes al dossier Off-Campus y nuestro equipo conoce tu caso."],["2","Matrícula","Formalizas la matrícula para abrir el expediente académico."],["3","Diagnóstico académico","Evaluamos nivel, ritmo de aprendizaje y necesidades principales del estudiante."],["4","PEI y materiales","Recibes el Plan Educativo Individualizado y la ruta de materiales A.C.E."],["5","Inicio con mentor asignado","Comienzas con acompañamiento, seguimiento y estructura académica."]].map(([num,title,text],i) => (
             <div key={i} style={{ textAlign:"center" }}>
               <div style={{ width:"64px", height:"64px", background:"#0E2549", border:"2px solid #3A7D2C", borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"Playfair Display,Georgia,serif", fontSize:"24px", fontWeight:700, color:"#7DCF47", margin:"0 auto 14px" }}>{num}</div>
               <div style={{ fontWeight:600, fontSize:"13px", color:"#fff", marginBottom:"6px" }}>{title}</div>
@@ -313,6 +313,44 @@ export default function ChanakApp() {
         </div>
       </div>
 
+      {/* PRICING */}
+      <div style={{ background:"#fff", padding:"72px 5%", borderTop:"1px solid #E5EAF0", borderBottom:"1px solid #E5EAF0" }}>
+        <div style={{ maxWidth:"1100px", margin:"0 auto" }}>
+          <div style={{ textAlign:"center", marginBottom:"42px" }}>
+            <p style={{ fontSize:"10px", fontWeight:700, letterSpacing:"3px", textTransform:"uppercase", color:"#C9A84C", marginBottom:"10px" }}>INVERSIÓN OFF-CAMPUS</p>
+            <h2 style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"clamp(24px,3.5vw,38px)", fontWeight:700, color:"#0D1B2A", lineHeight:1.2, marginBottom:"12px" }}>Precios claros para planificar el año</h2>
+            <p style={{ fontSize:"14px", color:"#5A7060", lineHeight:1.8, maxWidth:"680px", margin:"0 auto" }}>Diagnóstico académico y PEI incluidos en la matrícula. Puedes iniciar en cualquier momento del año o seguir el calendario del año lectivo.</p>
+          </div>
+          <div style={{ display:"grid", gridTemplateColumns:isMobile?"1fr":"repeat(2,minmax(0,1fr))", gap:"24px", alignItems:"stretch" }}>
+            {[
+              { title:"OPCIÓN A — Pago tradicional", rows:[["Matrícula + Diagnóstico académico + PEI","180€ único"],["Material A.C.E. completo","480€ pago único al inicio"],["Mensualidad","70€/mes"]], totalLabel:"Total primer mes", total:"730€" },
+              { title:"OPCIÓN B — Pago trimestral", rows:[["Matrícula + Diagnóstico académico + PEI","180€ único"],["Material T1 Agosto","180€"],["Material T2 Noviembre","180€"],["Material T3 Febrero","180€"],["Mensualidad","70€/mes"],["Total año","1.380€"]], totalLabel:"Total primer mes", total:"430€" },
+            ].map((plan) => (
+              <article key={plan.title} style={{ background:"#F8FBF5", border:"1px solid #D1D5E8", borderRadius:"16px", overflow:"hidden", boxShadow:"0 16px 42px rgba(13,27,42,.08)", display:"flex", flexDirection:"column" }}>
+                <div style={{ background:"#0D1B2A", color:"#fff", padding:"18px 22px", borderBottom:"3px solid #C9A84C" }}>
+                  <h3 style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"20px", margin:0 }}>{plan.title}</h3>
+                </div>
+                <div style={{ padding:"22px", display:"flex", flexDirection:"column", gap:"12px", flex:1 }}>
+                  {plan.rows.map(([label,value]) => (
+                    <div key={label} style={{ display:"flex", justifyContent:"space-between", gap:"14px", borderBottom:"1px solid #E4EBDD", paddingBottom:"10px", fontSize:"13px", lineHeight:1.5, color:"#243849" }}>
+                      <span>{label}</span>
+                      <strong style={{ color:"#0D1B2A", textAlign:"right", whiteSpace:"nowrap" }}>{value}</strong>
+                    </div>
+                  ))}
+                  <div style={{ marginTop:"auto", background:"#FFF8E7", border:"1px solid #C9A84C", borderRadius:"12px", padding:"16px", display:"flex", justifyContent:"space-between", alignItems:"center", gap:"14px" }}>
+                    <span style={{ fontSize:"13px", fontWeight:700, color:"#0D1B2A" }}>{plan.totalLabel}</span>
+                    <strong style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"28px", color:"#0D1B2A" }}>{plan.total}</strong>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div style={{ background:"#FFF8E7", border:"2px solid #C9A84C", borderRadius:"14px", padding:isMobile?"18px":"22px 28px", margin:"28px auto 0", maxWidth:"820px", textAlign:"center", color:"#0D1B2A", fontSize:"16px", lineHeight:1.6, fontWeight:700 }}>
+            La mayoría de familias elige la Opción B — pagas el material cuando lo recibes, sin grandes desembolsos iniciales.
+          </div>
+        </div>
+      </div>
+
       {/* FAQ */}
       <div style={{ background:"#F8FBF5", padding:"72px 5%" }}>
         <div style={{ textAlign:"center", marginBottom:"48px" }}>
@@ -320,7 +358,7 @@ export default function ChanakApp() {
           <h2 style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"clamp(24px,3vw,36px)", fontWeight:700, color:"#1A3A6B" }}>Lo que más nos preguntan</h2>
         </div>
         <div style={{ display:"grid", gridTemplateColumns:"1fr", gap:"14px", maxWidth:"880px", margin:"0 auto" }}>
-          {[["¿Puedo comenzar en cualquier época del año?","Sí. El modelo Mastery Learning permite incorporarse en cualquier momento. No hay fecha fija ni período de espera."],["¿El diploma americano tiene validez internacional?","Chanak emite diplomas de una escuela registrada en Florida (FDOE #134620). La documentación es apostillable."],["¿Necesito vivir en un país específico?","No. Operamos 100% online. Familias en España, Panamá, Colombia, México y muchos otros países participan."],["¿Dónde encuentro los precios?","En el dossier informativo que te enviamos al solicitar información. Incluye inversión completa y proceso de admisión."],["¿La orientación tiene algún costo?","No. La orientación inicial es 100% gratuita. Recibirás el dossier Off Campus."],["¿Qué es el Mastery Learning?","El alumno avanza cuando domina el contenido — no por cumplir tiempo. Garantiza que no haya lagunas de aprendizaje."]].map(([q,a],i) => (
+          {[["¿Puedo comenzar en cualquier época del año?","Sí. El modelo Mastery Learning permite incorporarse en cualquier momento. No hay fecha fija ni período de espera."],["¿El diploma americano tiene validez internacional?","Chanak emite diplomas de una escuela registrada en Florida (FDOE #134620). La documentación es apostillable."],["¿Necesito vivir en un país específico?","No. Operamos 100% online. Familias en España, Panamá, Colombia, México y muchos otros países participan."],["¿Dónde encuentro los precios?","Puedes revisarlos en la sección de precios de esta página. El dossier informativo amplía el proceso de admisión y la ruta académica."],["¿Qué incluye la matrícula?","La matrícula incluye diagnóstico académico y PEI para abrir correctamente el expediente del estudiante."],["¿Qué es el Mastery Learning?","El alumno avanza cuando domina el contenido — no por cumplir tiempo. Garantiza que no haya lagunas de aprendizaje."]].map(([q,a],i) => (
             <div key={i} style={{ background:"#fff", border:"1px solid #D1D5E8", borderRadius:"10px", padding:"20px 24px" }}>
               <div style={{ display:"flex", gap:"9px", fontWeight:600, fontSize:"13px", color:"#1A3A6B", marginBottom:"8px" }}>
                 <span style={{ width:"20px", height:"20px", background:"#3A7D2C", color:"#fff", fontSize:"10px", fontWeight:700, borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0, marginTop:"1px" }}>?</span>{q}
@@ -339,13 +377,13 @@ export default function ChanakApp() {
           Educar con fe, valores y visión internacional<br /><em style={{ color:"#7DCF47" }}>sí es posible.</em>
         </h2>
         <p style={{ fontSize:"15px", color:"rgba(255,255,255,.55)", lineHeight:1.75, maxWidth:"520px", margin:"0 auto 32px", position:"relative" }}>
-          Las admisiones están abiertas todo el año. Solicita el dossier hoy — gratis y sin compromiso.
+          Las admisiones están abiertas todo el año. Solicita el dossier informativo y habla con nuestro equipo.
         </p>
         <div style={{ display:"flex", gap:"14px", justifyContent:"center", flexWrap:"wrap", marginBottom:"16px" }}>
-          <button onClick={()=>setView("pdf")} style={btn("#3A7D2C")}>Quiero el dossier + orientación gratis →</button>
+          <button onClick={()=>setView("pdf")} style={btn("#3A7D2C")}>Hablar con admisiones →</button>
           <button onClick={()=>{ setProgram("offcampus"); setView("form"); }} style={{ ...btn("#635BFF"), padding:"13px 28px" }}>💳 Ya decidí — matricularme ahora</button>
         </div>
-        <div style={{ fontSize:"12px", color:"rgba(255,255,255,.35)", display:"flex", alignItems:"center", gap:"7px", justifyContent:"center" }}>🛡️ Gratuito · Sin compromiso · Respuesta en el menor tiempo posible</div>
+        <div style={{ fontSize:"12px", color:"rgba(255,255,255,.35)", display:"flex", alignItems:"center", gap:"7px", justifyContent:"center" }}>🛡️ Sin compromiso · Respuesta del equipo de admisiones</div>
       </div>
 
       {/* FOOTER */}
@@ -384,7 +422,7 @@ export default function ChanakApp() {
         <div style={{ maxWidth:"760px", width:"100%", textAlign:"center", marginBottom:"40px" }}>
           <div style={{ fontSize:"40px", marginBottom:"16px" }}>📄</div>
           <h1 style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"clamp(26px,4vw,40px)", fontWeight:700, color:"#1A3A6B", marginBottom:"12px" }}>Dossier Off Campus / Homeschool</h1>
-          <p style={{ fontSize:"15px", color:"#5A7060", lineHeight:1.7 }}>Accede al dossier e introduce tu email. Te contactamos para acompañarte en matrícula y orientación académica.</p>
+          <p style={{ fontSize:"15px", color:"#5A7060", lineHeight:1.7 }}>Accede al dossier informativo e introduce tu email. Te contactamos para acompañarte en el proceso de admisión.</p>
         </div>
         <PDFPicker
           pdfOC={PDF_OFFCAMPUS}
@@ -422,7 +460,7 @@ export default function ChanakApp() {
         <h1 style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"28px", fontWeight:700, color:"#1A3A6B", marginBottom:"12px" }}>¡Solicitud recibida!</h1>
         <p style={{ fontSize:"15px", color:"#5A7060", lineHeight:1.7, marginBottom:"28px" }}>Gracias. Hemos recibido tu solicitud sobre Off Campus. Nuestro equipo se pondrá en contacto contigo.</p>
         <div style={{ background:"#EDF2E8", border:"1px solid #C1D9B8", borderRadius:"12px", padding:"20px", marginBottom:"24px", textAlign:"left" }}>
-          {[["1","Revisa tu correo — dossier PDF enviado"],["2","Un asesor te contacta por WhatsApp"],["3","Orientación gratuita de 30 min"],["4","Activación del expediente en 24h hábiles"]].map(([num,txt]) => (
+          {[["1","Revisa la información enviada por el equipo"],["2","Un asesor te contacta por WhatsApp"],["3","Respuesta del equipo de admisiones"],["4","Siguientes pasos para matrícula y expediente"]].map(([num,txt]) => (
             <div key={num} style={{ display:"flex", gap:"10px", alignItems:"flex-start", marginBottom:"10px" }}>
               <div style={{ width:"22px", height:"22px", background:"#3A7D2C", color:"#fff", fontSize:"10px", fontWeight:700, borderRadius:"50%", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 }}>{num}</div>
               <span style={{ fontSize:"13px", color:"#1C2820" }}>{txt}</span>
@@ -548,7 +586,7 @@ function QuickForm({ onSuccess, onMatriculate, inp, errI, btn, mode = "info" }) 
         🔒 Datos confidenciales. Los usamos únicamente para tu solicitud de Off Campus.
       </p>
       <button type="submit" disabled={sending} style={{ ...btn("#3A7D2C"), width:"100%", minHeight:"48px", padding:"12px 16px", display:"inline-flex", alignItems:"center", justifyContent:"center", lineHeight:1.4, letterSpacing:"0.6px", opacity:sending?0.75:1 }}>
-        {sending ? "Guardando tus datos..." : (mode === "matricula" ? "Matricularme y pagar" : "Enviar y recibir dossier gratis")}
+        {sending ? "Guardando tus datos..." : (mode === "matricula" ? "Matricularme y pagar" : "Recibir dossier informativo")}
       </button>
       <div style={{ minHeight:"22px" }}>
         {submitMsg && <p style={{ fontSize:"12px", lineHeight:1.4, color:"#3A7D2C", margin:0 }}>{submitMsg}</p>}
@@ -595,7 +633,7 @@ function PDFPicker({ pdfOC, onMatriculate, onSuccess, inp, errI, btn }) {
       {chosen && (
         <div style={{ maxWidth:"460px", width:"100%", background:"#fff", borderRadius:"16px", padding:"28px", boxShadow:"0 20px 60px rgba(26,58,107,.1)", border:"1px solid #D1D5E8" }}>
           <h3 style={{ fontFamily:"Playfair Display,Georgia,serif", fontSize:"16px", fontWeight:700, color:"#1A3A6B", marginBottom:"6px" }}>¿A dónde te enviamos la información de Off Campus?</h3>
-          <p style={{ fontSize:"12px", color:"#5A7060", marginBottom:"16px" }}>También te ofreceremos orientación gratuita.</p>
+          <p style={{ fontSize:"12px", color:"#5A7060", marginBottom:"16px" }}>Respuesta del equipo de admisiones.</p>
           <input type="email" placeholder="Tu correo electrónico *" value={email} onChange={e=>{ setEmail(e.target.value); setErr(""); }}
             style={{ width:"100%", padding:"12px 14px", border:`1.5px solid ${err?"#E53E3E":"#D1D5E8"}`, borderRadius:"8px", fontSize:"14px", fontFamily:"DM Sans,sans-serif", background:"#F8FBF5", outline:"none", marginBottom:"4px", boxSizing:"border-box" }} />
           {err && <div style={{ fontSize:"10px", color:"#E53E3E", marginBottom:"8px" }}>{err}</div>}
