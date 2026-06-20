@@ -1,5 +1,6 @@
 import Script from "next/script";
 import CookieBanner from "../components/CookieBanner";
+import MetaPixel from "../components/MetaPixel";
 
 export const metadata = {
   title: "Chanak International Academy | Off-Campus y Dual Diploma",
@@ -11,6 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="es">
       <body style={{ margin: 0 }}>
         {children}
+        <MetaPixel />
         <CookieBanner />
         <Script id="google-consent-default" strategy="beforeInteractive">
           {`

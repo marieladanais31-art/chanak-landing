@@ -61,6 +61,7 @@ export default function CookieBanner() {
 
     if (preference === "accepted") {
       updateGoogleConsent("granted", "granted");
+      window.dispatchEvent(new Event("chanak:cookies-accepted"));
     } else {
       updateGoogleConsent("denied", "denied");
     }
